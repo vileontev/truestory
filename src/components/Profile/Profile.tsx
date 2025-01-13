@@ -72,7 +72,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 <img src={emailIcon} className="social" alt="email icon" />
               </a>
               <a
-                href="https://github.com/exWade"
+                href="https://github.com/vileontev"
                 className="social-box"
                 aria-label="Go to user github"
                 target="_blank"
