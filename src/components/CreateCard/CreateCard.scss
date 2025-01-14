@@ -1,21 +1,40 @@
 .static-cards {
-	height: 20vh;
-	background-image: url('../../assets/cards.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	transition: all .3s ease;
+  height: 20vh;
+  background-image: url("../../assets/cards.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transition: all 0.3s ease;
 }
 
 .lng-creatingBtn {
-	background-color: var(--anchor-color);
+  background-color: var(--anchor-color);
 }
 
-button[type=submit]:hover {
-	filter: invert(1);
-	transition: filter .3s ease-in-out;
+button[type="submit"]:hover {
+  filter: invert(1);
+  transition: filter 0.3s ease-in-out;
 }
 
 input:user-invalid {
-	border-color: rgb(141, 28, 28);
+  border-color: rgb(141, 28, 28);
+}
+
+textarea {
+  width: 100%;
+}
+
+.textContainer {
+  position: relative;
+  width: 100%;
+}
+
+output {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+  background-color: gray;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
 }

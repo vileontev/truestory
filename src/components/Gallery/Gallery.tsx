@@ -24,7 +24,8 @@ interface GalleryProps {
 }
 
 export function Gallery({ searched, counting, t }: GalleryProps) {
-  const { modal, open, close, modalCreate, closeCreate } = useContext(ModalContext);
+  const { modal, open, close, modalCreate, closeCreate } =
+    useContext(ModalContext);
   const [modalState, setModalState] = useState<ICard | null>(null);
   const [photocards, setPhotocards] = useState<ICard[]>([...initialCards]);
 
@@ -54,7 +55,9 @@ export function Gallery({ searched, counting, t }: GalleryProps) {
     const movedCard = searchedCards[source.index];
 
     // Создаём копию основного массива без перемещаемой карточки
-    const updatedPhotocards = photocards.filter((card) => card.id !== movedCard.id);
+    const updatedPhotocards = photocards.filter(
+      (card) => card.id !== movedCard.id
+    );
 
     // Вставляем перемещаемую карточку в новую позицию
     const newIndex = destination.index;
@@ -112,10 +115,16 @@ export function Gallery({ searched, counting, t }: GalleryProps) {
               {...provided.droppableProps}
             >
               {searchedCards.map((card, index) => (
-                <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
+                <Draggable
+                  key={card.id}
+                  draggableId={card.id.toString()}
+                  index={index}
+                >
                   {(provided, snapshot) => (
                     <div
-                      className={`photo-card ${snapshot.isDragging ? "dragging" : ""}`}
+                      className={`photo-card ${
+                        snapshot.isDragging ? "dragging" : ""
+                      }`}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}

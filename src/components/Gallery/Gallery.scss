@@ -1,12 +1,11 @@
 .workspace {
   .photo-card {
-      
     &:hover {
       -webkit-transform: scale(1.025);
       -moz-transform: scale(1.025);
       -o-transform: scale(1.025);
       transform: scale(1.025);
-      
+
       -webkit-transition: transform 0.15s linear;
       -moz-transition: transform 0.15s linear;
       -o-transition: transform 0.15s linear;
@@ -14,18 +13,15 @@
     }
   }
   /* Стили для активного перетаскивания */
-.photo-card.dragging {
-  box-shadow: 0px 0px 12px -4px var(--anchor-color);
-}
+  .photo-card.dragging {
+    box-shadow: 0px 0px 12px -4px var(--anchor-color);
+  }
 }
 
-
-.workspace
-{
+.workspace {
   row-gap: 3rem;
   padding-bottom: 32px;
 }
-
 
 // 2xl
 @media screen and (max-width: 1536px) {
@@ -57,14 +53,12 @@
 @media screen and (max-width: 768px) {
   .workspace {
     row-gap: 1.5rem;
-    
   }
 }
 // // sm
 @media screen and (max-width: 640px) {
   .workspace {
     gap: 0rem;
-    
   }
 }
 // }

@@ -13,7 +13,10 @@ interface CreateCardProps {
 const CreateCard = ({ onCreate, t }: CreateCardProps) => {
   const today = new Date();
 
-  const { closeCreate } = useContext(ModalContext); 
+  const [text, setText] = useState(""); // textarea output
+  const maxLength = 500;
+
+  const { closeCreate } = useContext(ModalContext);
 
   const [data, setData] = useState<ICard>({
     id: ++cards.length,
@@ -36,6 +39,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
 
   const changeAreaHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
+    setText(event.target.value);
   };
 
   return (
@@ -97,21 +101,26 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
         >
           {t("creatingDescription")}
         </label>
-        <textarea
-          id="description"
-          name="description"
-          className="border-solid border-2 h-[12vh] border-gray-600 py-2 px-3 mb-4 focus:border-gray-400 transition-all"
-          style={{
-            backgroundColor: "transparent",
-            borderRadius: "8px",
-            resize: "vertical",
-            minHeight: "100px",
-            maxHeight: "250px",
-          }}
-          value={data.description}
-          onChange={changeAreaHandler}
-          maxLength={500}
-        />
+        <div className="textContainer">
+          <textarea
+            id="description"
+            name="description"
+            className="border-solid border-2 h-[12vh] border-gray-600 py-2 px-3 mb-4 focus:border-gray-400 transition-all"
+            style={{
+              backgroundColor: "transparent",
+              borderRadius: "8px",
+              resize: "vertical",
+              minHeight: "100px",
+              maxHeight: "250px",
+            }}
+            value={data.description}
+            onChange={changeAreaHandler}
+            maxLength={500}
+          />
+          <output id="charCount">
+            {text.length}/{maxLength}
+          </output>
+        </div>
         <label
           htmlFor="place"
           className="lng-creatingPlace mb-1 pl-1 tracking-wider"
@@ -158,11 +167,15 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
         >
           {t("creatingBtn")}
         </button>
-        
-        <button formMethod="dialog" type="submit" className="close" onClick={closeCreate}>
-            ×
-          </button>
 
+        <button
+          formMethod="dialog"
+          type="submit"
+          className="close"
+          onClick={closeCreate}
+        >
+          ×
+        </button>
       </form>
     </div>
   );
