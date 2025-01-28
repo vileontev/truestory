@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
     searching(e.target.value);
   };
 
-  // Temnaya temka
+  // Appearance theme
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -60,22 +60,14 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
             onClick={() => {
               navigate("browse", { replace: false });
             }}
-            id="truestory-logo"
-          >
+            id="truestory-logo">
             <img
               src="https://cdn-icons-png.flaticon.com/128/2965/2965705.png"
               className="header-logo__camera"
-              alt="Truestory camera logo"
-            ></img>{" "}
-            <span className="hidden xl:inline lg:inline md:inline sm:hidden align-bottom h-[26px]">
-              Truestory
-            </span>{" "}
+              alt="Truestory camera logo"></img>{" "}
+            <span className="hidden xl:inline lg:inline md:inline sm:hidden align-bottom h-[26px]">Truestory</span>{" "}
           </button>
-          <button
-            className="switch-lang"
-            id="switchLang"
-            aria-label="Change app language"
-          >
+          <button className="switch-lang" id="switchLang" aria-label="Change app language">
             <div className="langs__layout">
               <ul className="langs">
                 <li
@@ -83,8 +75,7 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
                   aria-label="Switch to english language"
                   className="langs__item"
                   data-lang="en"
-                  onClick={() => changeLang("en")}
-                >
+                  onClick={() => changeLang("en")}>
                   <div className="flag en"></div> <span>English</span>
                 </li>
                 <li
@@ -92,8 +83,7 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
                   aria-label="Switch to turkish language"
                   className="langs__item"
                   data-lang="tk"
-                  onClick={() => changeLang("tk")}
-                >
+                  onClick={() => changeLang("tk")}>
                   <div className="flag tk"></div>
                   <span>Türkçe</span>
                 </li>
@@ -102,8 +92,7 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
                   aria-label="Switch to serbian language"
                   className="langs__item"
                   data-lang="rs"
-                  onClick={() => changeLang("rs")}
-                >
+                  onClick={() => changeLang("rs")}>
                   <div className="flag rs"></div>
                   <span>Српски</span>
                 </li>
@@ -121,17 +110,11 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
                 name="q"
                 onChange={handleSearchQuery}
                 placeholder={t("search") ? t("search") : "Search"}
-                className="header-search"
-              ></input>
+                className="header-search"></input>
               <div className="magnifier"></div>
             </div>
           </div>
-          <button
-            aria-label="Change app theme"
-            className="switch-mode"
-            id="switch-mode"
-            onClick={toggleTheme}
-          ></button>
+          <button aria-label="Change app theme" className="switch-mode" id="switch-mode" onClick={toggleTheme}></button>
 
           <div>
             <button
@@ -139,12 +122,8 @@ const Header: React.FC<HeaderProps> = ({ searching, i18n, t }) => {
               className="header-info__mini"
               onClick={() => {
                 navigate("/", { replace: false });
-              }}
-            >
-              <div
-                className="avatar-mini"
-                style={{ backgroundImage: `url(${avatarMini})` }}
-              ></div>
+              }}>
+              <div className="avatar-mini" style={{ backgroundImage: `url(${avatarMini})` }}></div>
               <div className="nickname-mini">{profile.nickname}</div>
             </button>
           </div>

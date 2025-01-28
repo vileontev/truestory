@@ -13,6 +13,7 @@ interface CreateCardProps {
 const CreateCard = ({ onCreate, t }: CreateCardProps) => {
   const today = new Date();
 
+  // const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [text, setText] = useState(""); // textarea output
   const maxLength = 500;
 
@@ -40,6 +41,35 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
   const changeAreaHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData({ ...data, [event.target.name]: event.target.value });
     setText(event.target.value);
+  };
+
+  // function handleImageLoad(event: Event) {
+  //   const img2 = event.target as HTMLImageElement;
+  //   window.URL.revokeObjectURL(img2.src);
+  //   console.log("Image loaded:", img2.src);
+
+  //   // g.ctx.canvas.width = 256;
+  // }
+
+  const getImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+    const file = event.target.files;
+
+    console.log("file", file);
+    console.log("file length", file?.length);
+
+    if (!file || !file.length) {
+      console.error("no image selected");
+    } else {
+      const imgURL = window.URL.createObjectURL(file[0]);
+      setData({ ...data, ["url"]: imgURL });
+      console.log("imgURL", imgURL);
+      // setImageSrc(imgURL);
+      // const img = new window.Image();
+      // img.addEventListener("load", handleImageLoad);
+      // // img.addEventListener("error", handleImageError);
+      // img.src = imgURL;
+    }
   };
 
   return (
@@ -75,6 +105,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
           onChange={changeHandler}
           pattern="[\p{L} \-]{2,30}"
           enterKeyHint="next"
+          maxLength={80}
           required
         />
 
@@ -84,17 +115,27 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
         >
           {t("creatingUrl")}
         </label>
-        <input
-          type="url"
-          id="url"
-          name="url"
-          className="border-solid border-2 border-gray-600 py-2 px-3 mb-4 focus:border-gray-400 transition-all"
-          style={{ backgroundColor: "transparent", borderRadius: "8px" }}
-          value={data.url}
-          onChange={changeHandler}
-          enterKeyHint="next"
-          required
-        />
+        <div className="fileContainer">
+          <input
+            type="url"
+            id="url"
+            name="url"
+            className="border-solid border-2 border-gray-600 py-2 px-3 mb-4 focus:border-gray-400 transition-all"
+            style={{ backgroundColor: "transparent", borderRadius: "8px" }}
+            value={data.url}
+            onChange={changeHandler}
+            enterKeyHint="next"
+            required
+          />
+
+          <input
+            type="file"
+            accept="image/*"
+            name="file"
+            id="image"
+            onChange={getImage}
+          />
+        </div>
         <label
           htmlFor="description"
           className="lng-creatingDescription mb-1 pl-1 tracking-wider"
@@ -137,6 +178,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
           style={{ backgroundColor: "transparent", borderRadius: "8px" }}
           value={data.place}
           onChange={changeHandler}
+          maxLength={80}
           enterKeyHint="next"
         />
         <label
