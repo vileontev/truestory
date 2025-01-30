@@ -94,7 +94,7 @@ export function Gallery({ searched, counting, t }: GalleryProps) {
   };
 
   return (
-    <main className="mx-auto">
+    <main className="mx-auto profile-gallery">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="gallery" direction="horizontal">
           {(provided) => (

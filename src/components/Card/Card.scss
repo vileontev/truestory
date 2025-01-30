@@ -1,3 +1,7 @@
+.profile-gallery .photo-card:active {
+  cursor: grabbing;
+}
+
 .photo-card {
   display: flex;
   justify-content: center;
@@ -32,9 +36,9 @@
     transition: box-shadow 0.25s linear;
   }
 
-  &:active {
-    cursor: grabbing;
-  }
+  // &:active {
+
+  // }
 
   .photo-card-content {
     position: relative;
