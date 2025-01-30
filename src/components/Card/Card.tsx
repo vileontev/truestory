@@ -9,6 +9,7 @@ interface CardProps {
 
 export function Card({ card, onModal }: CardProps) {
   const handleModalOpening = (cardState: ICard) => {
+    console.log("card open in modal");
     onModal(cardState);
   };
 

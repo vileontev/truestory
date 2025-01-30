@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { ModalContext } from "../../context/ModalContext";
 import { ICard } from "../../types/models";
 import "./Modal.scss";
@@ -9,7 +10,6 @@ interface ModalProps {
 }
 
 export function Modal({ card, onClose }: ModalProps) {
-  
   const today = new Date();
   const ref = useRef();
   const { modal } = useContext(ModalContext);
@@ -22,20 +22,16 @@ export function Modal({ card, onClose }: ModalProps) {
     }
   }, [modal]);
 
-  return (
+  return createPortal(
     <dialog className="modal" ref={ref} id="modalWindow" onClick={onClose} onCancel={onClose}>
       <div
         className="modal-whiteboard"
         role="document"
         onClick={(e) => {
           e.stopPropagation();
-        }}
-      >
+        }}>
         <div className="whiteboard-container">
-          <div
-            className="modal-left-side"
-            style={{ backgroundImage: `url(${card?.thumbnailUrl})` }}
-          >
+          <div className="modal-left-side" style={{ backgroundImage: `url(${card?.thumbnailUrl})` }}>
             <div className="modalImage-container">
               <img
                 src={card?.url}
@@ -44,8 +40,7 @@ export function Modal({ card, onClose }: ModalProps) {
                 onError={(event) => {
                   const target = event.target as HTMLImageElement;
                   target.src = `https://placehold.co/600x600?text=${card?.title}`;
-                }}
-              ></img>
+                }}></img>
             </div>
           </div>
           <div className="modal-right-side">
@@ -56,8 +51,7 @@ export function Modal({ card, onClose }: ModalProps) {
               {card?.description || card?.title}
             </p>
             <p className="modalImage-caption mt-6 italic" id="modal-caption">
-              {card?.place || "Unkown place"},{" "}
-              {card?.year || today.getFullYear()}
+              {card?.place || "Unkown place"}, {card?.year || today.getFullYear()}
             </p>
           </div>
         </div>
@@ -65,6 +59,7 @@ export function Modal({ card, onClose }: ModalProps) {
           ×
         </button>
       </div>
-    </dialog>
+    </dialog>,
+    document.getElementById("modal")
   );
 }

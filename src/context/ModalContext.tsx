@@ -18,9 +18,6 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [modal, setModal] = useState(false);
   const [modalCreate, setModalCreate] = useState(false);
 
-  const dialog =
-    (document.querySelector(".modal") as HTMLDialogElement) || undefined;
-
   const open = () => {
     setModal(true);
     document.documentElement.style.overflow = "hidden";
@@ -31,21 +28,22 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const openCreate = () => {
+    console.log("open create called");
     setModalCreate(true);
-    // dialog?.showModal();
     document.documentElement.style.overflow = "hidden";
   };
-  const closeCreate = () => {
+  const closeCreate = (event?: React.SyntheticEvent) => {
+    if (event) {
+      event.preventDefault();
+    }
+
     setModalCreate(false);
-    // dialog?.close();
     document.documentElement.style.overflow = "";
   };
 
   return (
     // оборачивает все дочерние компоненты и предоставляет значения контекста
-    <ModalContext.Provider
-      value={{ modal, open, close, modalCreate, openCreate, closeCreate }}
-    >
+    <ModalContext.Provider value={{ modal, open, close, modalCreate, openCreate, closeCreate }}>
       {children}
     </ModalContext.Provider>
   );

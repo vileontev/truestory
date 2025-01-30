@@ -2,29 +2,30 @@ import React, { useContext, useEffect, useRef } from "react";
 import { ModalContext } from "../../context/ModalContext";
 import "../Modal/Modal.scss";
 
-const CreateCardModal = ({children}: {children: React.ReactNode}) => {    const ref = useRef();
-    const { modalCreate, closeCreate } = useContext(ModalContext);   
+const CreateCardModal = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef();
+  const { modalCreate, closeCreate } = useContext(ModalContext);
 
-    useEffect(() => {
-      if (modalCreate) {
-        ref.current?.showModal();
-      } else {
-        ref.current?.close();
-      }
-    }, [modalCreate]);
+  useEffect(() => {
+    if (modalCreate) {
+      ref.current?.showModal();
+    } else {
+      ref.current?.close();
+    }
+  }, [modalCreate]);
+
+  // TO DO: onCancel с closeCreate - жуткий костыль, который создает баг при отмене выбора изображения с компьютера (закрывает всю модалку). Нужно создать обработчик такой ситуации в контексте.
 
   return (
-      <dialog className="modal" onCancel={closeCreate} ref={ref} id="modalWindow">
-        <div
-          className="modal-whiteboard flex justify-center"
-          // onClick={(e) => {
-          //   e.stopPropagation();
-          // }}
-        >
-          
-          {children}
-        </div>
-      </dialog>
+    <dialog className="modal" onCancel={closeCreate} ref={ref} id="modalWindow">
+      <div
+        className="modal-whiteboard flex justify-center"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}>
+        {children}
+      </div>
+    </dialog>
   );
 };
 

@@ -7,6 +7,10 @@ import telephoneIcon from "../../assets/telephone.svg";
 import emailIcon from "../../assets/email.svg";
 import webIcon from "../../assets/web.svg";
 
+import backgroundJpg from "../../assets/background.jpg";
+import backgroundAvif from "../../assets/background.avif";
+import backgroundWebp from "../../assets/background.webp";
+
 interface ProfileProps {
   t: TFunction;
   counted: number;
@@ -21,16 +25,34 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
   return (
     <section className="profile" aria-label="Profile review">
       <div className="background__container h-[168px] 2xl:h-[288px] xl:h-[288px] lg:h-[288px] md:h-[248px] sm:h-[168px]">
-        <img
-          srcSet={`${profile.backgroundImage}?width=100 100w,
-          ${profile.backgroundImage}?width=200 200w,
-          ${profile.backgroundImage}?width=400 400w,
-          ${profile.backgroundImage}?width=800 800w`}
-          sizes="(max-width: 800px) 100vw, 50vw"
-          alt="Background profile image picked by user"
-          src={`${profile.backgroundImage}`}
-          className="background__image"
-        />
+        <picture>
+          <source
+            type="image/avif"
+            className="background__image"
+            srcSet={`${backgroundAvif}?width=100 100w,
+            ${backgroundAvif}?width=200 200w,
+            ${backgroundAvif}?width=400 400w,
+            ${backgroundAvif}?width=800 800w`}
+            sizes="(max-width: 1520px) 100vw, 50vw"
+          />
+          <source
+            type="image/webp"
+            className="background__image"
+            srcSet={`${backgroundWebp}?width=100 100w,
+            ${backgroundWebp}?width=200 200w,
+            ${backgroundWebp}?width=400 400w,
+            ${backgroundWebp}?width=800 800w`}
+            sizes="(max-width: 1520px) 100vw, 50vw"
+          />
+          <img
+            src={`${backgroundJpg}?width="800"`}
+            alt="Background profile image picked by user"
+            className="background__image"
+            loading="eager" // гарантирует приоритетную загрузку изображения, важно для LCP
+            width={1520}
+            height={288}
+          />
+        </picture>
       </div>
 
       <div className="shadow" id="profile-js">
@@ -53,7 +75,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
             </div>
             <address className="social__group">
               <a href="tel:88888888888" className="social-box" aria-label="Call to user on the phone">
-                <img src={telephoneIcon} className="social" alt="phone icon" />
+                <img src={telephoneIcon} width={25} height={27} className="social" alt="phone icon" />
               </a>
               <a
                 href="mailto:exwadecoop@gmail.com"
@@ -61,7 +83,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 aria-label="Send an email to the user"
                 target="_blank"
                 rel="noreferrer">
-                <img src={emailIcon} className="social" alt="email icon" />
+                <img src={emailIcon} width={25} height={27} className="social" alt="email icon" />
               </a>
               <a
                 href="https://github.com/vileontev"
@@ -69,7 +91,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 aria-label="Go to user github"
                 target="_blank"
                 rel="noreferrer">
-                <img src={webIcon} className="social" alt="web icon" />
+                <img src={webIcon} width={25} height={27} className="social" alt="web icon" />
               </a>
             </address>
           </div>

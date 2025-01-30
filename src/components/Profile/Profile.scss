@@ -1,12 +1,12 @@
 .background__container {
   min-height: 168px;
-  width: auto;
+  width: 100%;
   background-color: var(--nav-input-color);
   border-radius: 16px 16px 0px 0px;
   overflow: hidden;
   // max-width : calc(1622px*0.9*0.9);
 
-  & .background__image {
+  & picture .background__image {
     // overflow: hidden;
     // inset: 0;
     width: 100%;
@@ -46,7 +46,6 @@
       background-color: var(--nav-input-color);
       margin-right: 20px;
       border-radius: 50%;
-      // background-image: url('../../assets/profile_photo.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-origin: content-box;

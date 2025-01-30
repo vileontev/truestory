@@ -43,14 +43,6 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
     setText(event.target.value);
   };
 
-  // function handleImageLoad(event: Event) {
-  //   const img2 = event.target as HTMLImageElement;
-  //   window.URL.revokeObjectURL(img2.src);
-  //   console.log("Image loaded:", img2.src);
-
-  //   // g.ctx.canvas.width = 256;
-  // }
-
   const getImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
     const file = event.target.files;
@@ -62,7 +54,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
       console.error("no image selected");
     } else {
       const imgURL = window.URL.createObjectURL(file[0]);
-      setData({ ...data, ["url"]: imgURL });
+      setData({ ...data, ["url"]: imgURL, ["thumbnailUrl"]: imgURL });
       console.log("imgURL", imgURL);
       // setImageSrc(imgURL);
       // const img = new window.Image();
@@ -83,16 +75,8 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
         </div>
       </div>
 
-      <form
-        action="#"
-        onSubmit={submitHandler}
-        method="post"
-        className="form flex flex-col w-[24vw] transition-all"
-      >
-        <label
-          htmlFor="title"
-          className="lng-creatingTitle mb-1 pl-1 tracking-wider"
-        >
+      <form action="#" onSubmit={submitHandler} method="post" className="form flex flex-col w-[24vw] transition-all">
+        <label htmlFor="title" className="lng-creatingTitle mb-1 pl-1 tracking-wider">
           {t("creatingTitle")}
         </label>
         <input
@@ -109,10 +93,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
           required
         />
 
-        <label
-          htmlFor="url"
-          className="lng-creatingUrl mb-1 pl-1 tracking-wider"
-        >
+        <label htmlFor="url" className="lng-creatingUrl mb-1 pl-1 tracking-wider">
           {t("creatingUrl")}
         </label>
         <div className="fileContainer">
@@ -128,18 +109,9 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
             required
           />
 
-          <input
-            type="file"
-            accept="image/*"
-            name="file"
-            id="image"
-            onChange={getImage}
-          />
+          <input type="file" accept="image/*" name="file" id="image" onChange={getImage} />
         </div>
-        <label
-          htmlFor="description"
-          className="lng-creatingDescription mb-1 pl-1 tracking-wider"
-        >
+        <label htmlFor="description" className="lng-creatingDescription mb-1 pl-1 tracking-wider">
           {t("creatingDescription")}
         </label>
         <div className="textContainer">
@@ -162,10 +134,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
             {text.length}/{maxLength}
           </output>
         </div>
-        <label
-          htmlFor="place"
-          className="lng-creatingPlace mb-1 pl-1 tracking-wider"
-        >
+        <label htmlFor="place" className="lng-creatingPlace mb-1 pl-1 tracking-wider">
           {t("creatingPlace")}
         </label>
         <input
@@ -181,10 +150,7 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
           maxLength={80}
           enterKeyHint="next"
         />
-        <label
-          htmlFor="year"
-          className="lng-creatingYear mb-1 pl-1 tracking-wider"
-        >
+        <label htmlFor="year" className="lng-creatingYear mb-1 pl-1 tracking-wider">
           {t("creatingYear")}
         </label>
         <input
@@ -205,17 +171,15 @@ const CreateCard = ({ onCreate, t }: CreateCardProps) => {
         <button
           type="submit"
           value="create"
-          className="lng-creatingBtn mt-4 py-2 px-3 rounded-lg w-[45%] self-center text-gray-100 transition-all delay-200 duration-300 ease-out"
-        >
+          className="lng-creatingBtn mt-4 py-2 px-3 rounded-lg w-[45%] self-center text-gray-100 transition-all delay-200 duration-300 ease-out">
           {t("creatingBtn")}
         </button>
 
         <button
-          formMethod="dialog"
-          type="submit"
+          // formMethod="dialog"
+          type="button"
           className="close"
-          onClick={closeCreate}
-        >
+          onClick={closeCreate}>
           ×
         </button>
       </form>
