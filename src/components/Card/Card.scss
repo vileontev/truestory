@@ -6,7 +6,7 @@
   height: 427.5px; // *0.9
   font-size: 18px; // *0.9
   // padding-left: 30.375px; // *0.9
-  padding: 0px 0px 24px 0px;
+  padding-bottom: 16px;
   // padding-bottom: 24px;
   // padding-right: 30.375px; // *0.9
   box-shadow: 2px 4px 12px #00000014;
@@ -38,16 +38,16 @@
 
   .photo-card-content {
     position: relative;
-    display: block;
+    // display: block;
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 
     //  transform: translate(0);
 
     .card-img-container {
       height: 320px; // *0.9
       border-radius: 16px 16px 0px 0px;
-      width: auto;
+      width: 100%;
       // will-change: transform;
       cursor: pointer;
       overflow: hidden;
@@ -78,37 +78,55 @@
         transition: transform 0.35s cubic-bezier(0.39, 0.575, 0.565, 1);
         // will-change: transform;
       }
+
+      button {
+        height: 100%;
+        width: 100%;
+      }
     }
 
     .image-caption {
       margin-top: 16px;
       overflow: hidden;
       min-height: 1.86em;
+      max-height: 45px;
       text-overflow: ellipsis;
       text-align: center;
       font-weight: 600;
       line-height: 1.25;
       will-change: transform;
       user-select: none;
+      padding: 0 16px;
       /* transition: color .5s ease; */
-    }
+      -webkit-line-clamp: 2; // количество строк
+      -webkit-box-orient: vertical;
 
-    .image-caption.skeleton {
-      margin-top: 16px;
-      min-height: 1.4em;
+      &.skeleton {
+        display: block;
+        width: 70%;
+        margin: 16px auto 0;
+        min-height: 24px;
+        // min-height: 1.4em;
+        // margin: 0 auto;
+      }
     }
 
     .addition {
       display: flex;
+      position: absolute;
+      bottom: 0;
       padding-top: 0px;
       height: 24px;
       width: 100%;
+      padding: 0 8px;
       justify-content: center;
       text-align: center;
+      font-style: italic;
       // will-change: unset !important;
       backface-visibility: hidden;
       transform: translateZ(0); /* Добавляем аппаратное ускорение */
       user-select: none;
+
       .addition-wrapper {
         position: relative;
         font-weight: normal;
@@ -118,24 +136,30 @@
         transform: translateZ(0);
         transition: width 0.5s;
         /* , color .5s ease */
+
+        &::before {
+          content: "";
+          display: block;
+          background-color: var(--text-color);
+          height: 1px;
+          border-radius: 8px;
+          width: 0%;
+          left: 50%;
+          bottom: 0;
+          position: absolute;
+          -webkit-transform: translateX(-50%);
+          -moz-transform: translateX(-50%);
+          transform: translateX(-50%);
+          -webkit-transition: width 0.5s ease;
+          -moz--transition: width 0.5s ease;
+          transition: width 0.5s ease;
+        }
       }
 
-      .addition-wrapper::before {
-        content: "";
+      &.skeleton {
         display: block;
-        background-color: var(--text-color);
-        height: 1px;
-        border-radius: 8px;
-        width: 0%;
-        left: 50%;
-        bottom: 0;
-        position: absolute;
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        transform: translateX(-50%);
-        -webkit-transition: width 0.5s ease;
-        -moz--transition: width 0.5s ease;
-        transition: width 0.5s ease;
+        margin: 0 25%;
+        width: 50%;
       }
     }
   }

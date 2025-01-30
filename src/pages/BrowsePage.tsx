@@ -30,9 +30,7 @@ const BrowsePage: React.FC<BrowsePageProps> = ({ searched, t }) => {
   useEffect(() => {
     if (fetching && !searched) {
       axios
-        .get(
-          `https://jsonplaceholder.typicode.com/photos?_limit=12&_page=${currentPage}`
-        )
+        .get(`https://jsonplaceholder.typicode.com/photos?_limit=12&_page=${currentPage}`)
         .then((response) => {
           setPhotos((prevPhotos) => [...prevPhotos, ...response.data]);
           setCurrentPage((prevState) => prevState + 1);
@@ -83,9 +81,7 @@ const BrowsePage: React.FC<BrowsePageProps> = ({ searched, t }) => {
 
   function getSearchedPhotos() {
     if (searched) {
-      return photos.filter((photo) =>
-        photo.title.trim().toLowerCase().includes(searched.trim().toLowerCase())
-      );
+      return photos.filter((photo) => photo.title.trim().toLowerCase().includes(searched.trim().toLowerCase()));
     }
 
     return photos;
@@ -97,30 +93,24 @@ const BrowsePage: React.FC<BrowsePageProps> = ({ searched, t }) => {
   return (
     <main className="container mx-auto worldwide">
       {fetching && photos.length === 0 && !searched ? (
-        <SkeletonGallery/>
+        <SkeletonGallery />
       ) : (
         <>
-        <div
-        className="workspace transition-all justify-items-center grid 2xl:grid-cols-4 2xl:gap-14 xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-12 md:grid-cols-2 md:gap-36 sm:grid-cols-1 sm:gap-4"
-        id="wrkspc"
-      >
-        {searchedPhotos.map((photo, index) => (
-          <div className="photo-card" key={`${photo.id}-${index}`}>
-            <Card card={photo} onModal={handleModalOpening} />
+          <div
+            className="workspace transition-all justify-items-center grid 2xl:grid-cols-4 2xl:gap-14 xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-12 md:grid-cols-2 md:gap-36 sm:grid-cols-1 sm:gap-4"
+            id="wrkspc">
+            {searchedPhotos.map((photo, index) => (
+              <article className="photo-card">
+                <Card card={photo} key={`${photo.id}-${index}`} onModal={handleModalOpening} />
+              </article>
+            ))}
           </div>
-        ))}
-      </div>
         </>
-      )
-    }
-      
+      )}
 
       {/* Триггер для IntersectionObserver */}
       {!searched && (
-        <div
-          ref={observerTarget}
-          style={{ height: "auto", backgroundColor: "transparent" }}
-        >
+        <div ref={observerTarget} style={{ height: "auto", backgroundColor: "transparent" }}>
           <Loader />
         </div>
       )}

@@ -38,8 +38,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
           <div
             title="User profile photo"
             className="profile__avatar w-[134px] h-[134px]  xl:w-[194px] xl:h-[194px] lg:w-[194px] lg:h-[194px] md:w-[194px] md:h-[194px] sm:w-[134px] sm:h-[134px]"
-            style={{ backgroundImage: `url(${profile.photo}` }}
-          >
+            style={{ backgroundImage: `url(${profile.photo}` }}>
             <div className="profile__status">
               <span className="text-2xl leading-8">{profile.status}</span>
             </div>
@@ -50,16 +49,10 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 <h2 className="nickname">{profile.nickname}</h2>
                 <div className="verified"></div>
               </div>
-              <h3 className="shortgray pl-[4px] pt-[8px]">
-                {profile.firstName}
-              </h3>
+              <h3 className="shortgray pl-[4px] pt-[8px]">{profile.firstName}</h3>
             </div>
             <address className="social__group">
-              <a
-                href="tel:88888888888"
-                className="social-box"
-                aria-label="Call to user on the phone"
-              >
+              <a href="tel:88888888888" className="social-box" aria-label="Call to user on the phone">
                 <img src={telephoneIcon} className="social" alt="phone icon" />
               </a>
               <a
@@ -67,8 +60,7 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 className="social-box"
                 aria-label="Send an email to the user"
                 target="_blank"
-                rel="noreferrer"
-              >
+                rel="noreferrer">
                 <img src={emailIcon} className="social" alt="email icon" />
               </a>
               <a
@@ -76,27 +68,20 @@ const Profile: React.FC<ProfileProps> = ({ t, counted }) => {
                 className="social-box"
                 aria-label="Go to user github"
                 target="_blank"
-                rel="noreferrer"
-              >
+                rel="noreferrer">
                 <img src={webIcon} className="social" alt="web icon" />
               </a>
             </address>
           </div>
         </div>
 
-        <details
-          className="profile__about hidden xl:block lg:block md:hidden sm:hidden"
-          id="profile__about"
-        >
-          <summary className="lng-about shortgray pb-[16px]">
-            {t("about")}
-          </summary>
+        <details className="profile__about hidden xl:block lg:block md:hidden sm:hidden" id="profile__about">
+          <summary className="lng-about shortgray pb-[16px]">{t("about")}</summary>
           <ul className="about__list" id="about-list">
             <li>• {profile.about.job}</li>
             <li>• {profile.about.age} y.o.</li>
             <li>
-              • Lives in {profile.about.residence.city},
-              {" " + profile.about.residence.country}
+              • Lives in {profile.about.residence.city},{" " + profile.about.residence.country}
             </li>
           </ul>
         </details>

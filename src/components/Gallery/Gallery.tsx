@@ -10,12 +10,7 @@ import { Modal } from "../Modal/Modal";
 import CreateCardModal from "../CreateCard/CreateCardModal";
 import CreateCard from "../CreateCard/CreateCard";
 import { TFunction } from "i18next";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 
 interface GalleryProps {
   searched: string;
@@ -24,17 +19,14 @@ interface GalleryProps {
 }
 
 export function Gallery({ searched, counting, t }: GalleryProps) {
-  const { modal, open, close, modalCreate, closeCreate } =
-    useContext(ModalContext);
+  const { modal, open, close, modalCreate, closeCreate } = useContext(ModalContext);
   const [modalState, setModalState] = useState<ICard | null>(null);
   const [photocards, setPhotocards] = useState<ICard[]>([...initialCards]);
 
   // Фильтрация карточек на основе поискового запроса
   const getSearchedCards = () => {
     if (searched) {
-      return photocards.filter((card) =>
-        card.title.trim().toLowerCase().includes(searched.trim().toLowerCase())
-      );
+      return photocards.filter((card) => card.title.trim().toLowerCase().includes(searched.trim().toLowerCase()));
     }
     return photocards;
   };
@@ -55,9 +47,7 @@ export function Gallery({ searched, counting, t }: GalleryProps) {
     const movedCard = searchedCards[source.index];
 
     // Создаём копию основного массива без перемещаемой карточки
-    const updatedPhotocards = photocards.filter(
-      (card) => card.id !== movedCard.id
-    );
+    const updatedPhotocards = photocards.filter((card) => card.id !== movedCard.id);
 
     // Вставляем перемещаемую карточку в новую позицию
     const newIndex = destination.index;
@@ -112,25 +102,17 @@ export function Gallery({ searched, counting, t }: GalleryProps) {
               className="workspace transition-all justify-items-center grid 2xl:grid-cols-4 2xl:gap-14 xl:grid-cols-4 xl:gap-4 lg:grid-cols-3 lg:gap-12 md:grid-cols-2 md:gap-36 sm:grid-cols-1 sm:gap-4"
               id="wrkspc"
               ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
+              {...provided.droppableProps}>
               {searchedCards.map((card, index) => (
-                <Draggable
-                  key={card.id}
-                  draggableId={card.id.toString()}
-                  index={index}
-                >
+                <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
                   {(provided, snapshot) => (
-                    <div
-                      className={`photo-card ${
-                        snapshot.isDragging ? "dragging" : ""
-                      }`}
+                    <article
+                      className={`photo-card ${snapshot.isDragging ? "dragging" : ""}`}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
+                      {...provided.dragHandleProps}>
                       <Card card={card} onModal={handleModalOpening} />
-                    </div>
+                    </article>
                   )}
                 </Draggable>
               ))}

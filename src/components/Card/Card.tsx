@@ -16,37 +16,33 @@ export function Card({ card, onModal }: CardProps) {
 
   return (
     <div className="photo-card-content">
-      <div
-        tabIndex={0}
-        className="card-img-container"
-        onClick={() => {
-          handleModalOpening(card);
-        }}
-      >
-        <img
-          className="card-image"
-          id="card-img"
-          src={`${card.thumbnailUrl ? card.thumbnailUrl : card.url}`}
-          alt={card.title}
-          onError={(event) => {
-            const target = event.target as HTMLImageElement;
-            target.src = `https://placehold.co/280x280?text=${card.title}`;
+      <figure className="card-img-container">
+        <button
+          onClick={() => {
+            handleModalOpening(card);
           }}
-        />
-      </div>
-      <div className="image-caption" aria-label="Image caption">
-        {card.title}
-      </div>
-      <div className="description hidden" aria-label="Card description">
-        {card.description || card.title}
-      </div>
+          aria-label={`Open image ${card.title}`}>
+          <img
+            className="card-image"
+            id="card-img"
+            src={`${card.thumbnailUrl ? card.thumbnailUrl : card.url}`}
+            alt={card.title}
+            onError={(event) => {
+              const target = event.target as HTMLImageElement;
+              target.src = `https://placehold.co/280x280?text=${card.title}`;
+            }}
+          />
+        </button>
+      </figure>
+      <h2 className="image-caption">{card.title}</h2>
+
+      <p className="description hidden">{card.description || card.title}</p>
       <div className="addition">
-        <div
-          className="addition-wrapper"
-          aria-label="Place where photo was taken and that date"
-        >
-          {card.place || "Unkown place"}, {card.year || today.getFullYear()}
-        </div>
+        <span className="addition-wrapper" aria-label="Place where photo was taken and that date">
+          {card.place || "Unkown place"}
+          ,&nbsp;
+          <time dateTime={card.year ? `${card.year}-01-01` : undefined}>{card.year || today.getFullYear()}</time>
+        </span>
       </div>
     </div>
   );
