@@ -51,10 +51,8 @@
     width: 80vw;
     height: 80vh;
 
-
     color: var(--text-color);
     background-color: var(--bg-card-color);
-    
 
     .whiteboard-container {
       position: relative;
@@ -264,7 +262,7 @@
   }
 
   .close {
-    right: -48px !important;
+    // right: -48px !important;
     font-size: 40px !important;
   }
 
